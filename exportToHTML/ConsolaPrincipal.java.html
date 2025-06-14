@@ -1,0 +1,175 @@
+<html>
+<head>
+<title>ConsolaPrincipal.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ConsolaPrincipal.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">InputMismatchException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ConsolaPrincipal </span><span class="s2">{</span>
+    <span class="s0">private static </span><span class="s1">Scanner scanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+    <span class="s0">private static </span><span class="s1">Torneo torneo </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Torneo</span><span class="s2">();</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">opcionPrincipal</span><span class="s2">;</span>
+
+        <span class="s0">do </span><span class="s2">{</span>
+            <span class="s1">mostrarMenuPrincipal</span><span class="s2">();</span>
+            <span class="s1">opcionPrincipal </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Seleccione una opción: &quot;</span><span class="s2">);</span>
+
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcionPrincipal</span><span class="s2">) {</span>
+                <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+                    <span class="s1">menuCarga</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+                    <span class="s1">menuVerificacion</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Saliendo...&quot;</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">default</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;❌ Opción inválida.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">while </span><span class="s2">(</span><span class="s1">opcionPrincipal </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static void </span><span class="s1">mostrarMenuPrincipal</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">=== 🏓 MENÚ PRINCIPAL DEL TORNEO ===&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;1. 📥 Cargar datos&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;2. 🔍 Verificar información&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;0. ↩️ Salir&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === SUBMENÚ DE CARGA DE DATOS ===</span>
+    <span class="s0">private static void </span><span class="s1">menuCarga</span><span class="s2">() {</span>
+        <span class="s0">int </span><span class="s1">opcion</span><span class="s2">;</span>
+        <span class="s0">do </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- 📥 MENÚ DE CARGA ---&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;1. 👤 Cargar jugador&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;2. 🧾 Generar partidos&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;3. 📝 Cargar resultado de partido&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;0. 🔙 Volver al menú principal&quot;</span><span class="s2">);</span>
+
+            <span class="s1">opcion </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Seleccione una opción: &quot;</span><span class="s2">);</span>
+
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcion</span><span class="s2">) {</span>
+                <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+                    <span class="s1">cargarJugador</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+                    <span class="s1">torneo</span><span class="s2">.</span><span class="s1">generarPartidos</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">3</span><span class="s2">:</span>
+                    <span class="s1">cargarResultado</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;↩️ Volviendo al menú principal...&quot;</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">default</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;❌ Opción inválida.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">opcion </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">deseaContinuar</span><span class="s2">(</span><span class="s3">&quot;¿Desea seguir cargando datos? (s/n): &quot;</span><span class="s2">)) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">while </span><span class="s2">(</span><span class="s1">opcion </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === SUBMENÚ DE VERIFICACIÓN DE INFORMACIÓN ===</span>
+    <span class="s0">private static void </span><span class="s1">menuVerificacion</span><span class="s2">() {</span>
+        <span class="s0">int </span><span class="s1">opcion</span><span class="s2">;</span>
+        <span class="s0">do </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- 🔍 MENÚ DE VERIFICACIÓN ---&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;1️⃣ 📋 Ver jugadores&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;2️⃣ 🕒 Ver partidos pendientes&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;3. 🏆 Ver ganador del torneo&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;0. 🔙 Volver al menú principal&quot;</span><span class="s2">);</span>
+
+            <span class="s1">opcion </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Seleccione una opción: &quot;</span><span class="s2">);</span>
+
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcion</span><span class="s2">) {</span>
+                <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+                    <span class="s1">torneo</span><span class="s2">.</span><span class="s1">mostrarJugadores</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+                    <span class="s1">torneo</span><span class="s2">.</span><span class="s1">mostrarPartidosPendientes</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">3</span><span class="s2">:</span>
+                    <span class="s1">torneo</span><span class="s2">.</span><span class="s1">mostrarGanador</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;↩️ Volviendo al menú principal...&quot;</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">default</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;❌ Opción inválida.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">opcion </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">deseaContinuar</span><span class="s2">(</span><span class="s3">&quot;¿Desea seguir verificando información? (s/n): &quot;</span><span class="s2">)) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">while </span><span class="s2">(</span><span class="s1">opcion </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === MÉTODO PARA CARGAR JUGADOR CON VALIDACIÓN ===</span>
+    <span class="s0">private static void </span><span class="s1">cargarJugador</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese nombre del jugador: &quot;</span><span class="s2">);</span>
+        <span class="s1">String nombre </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s0">int </span><span class="s1">edad </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Ingrese edad del jugador: &quot;</span><span class="s2">);</span>
+        <span class="s1">torneo</span><span class="s2">.</span><span class="s1">agregarJugador</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Jugador</span><span class="s2">(</span><span class="s1">nombre</span><span class="s2">, </span><span class="s1">edad</span><span class="s2">));</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;✅ Jugador agregado correctamente.&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === MÉTODO PARA CARGAR RESULTADO CON VALIDACIÓN ===</span>
+    <span class="s0">private static void </span><span class="s1">cargarResultado</span><span class="s2">() {</span>
+        <span class="s0">int </span><span class="s1">idPartido </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Ingrese ID del partido: &quot;</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">idGanador </span><span class="s2">= </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s3">&quot;Ingrese ID del jugador ganador: &quot;</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese marcador (ej. 3-2): &quot;</span><span class="s2">);</span>
+        <span class="s1">String marcador </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">torneo</span><span class="s2">.</span><span class="s1">cargarResultado</span><span class="s2">(</span><span class="s1">idPartido</span><span class="s2">, </span><span class="s1">idGanador</span><span class="s2">, </span><span class="s1">marcador</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === MÉTODO AUXILIAR PARA LEER ENTEROS DE FORMA SEGURA ===</span>
+    <span class="s0">private static int </span><span class="s1">leerEnteroSeguro</span><span class="s2">(</span><span class="s1">String mensaje</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">numero</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s2">(</span><span class="s0">true</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">numero </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+                <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">(); </span><span class="s5">// limpiar buffer</span>
+                <span class="s0">return </span><span class="s1">numero</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">InputMismatchException e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;⚠️ Error: ingrese un número válido. ⚠️&quot;</span><span class="s2">);</span>
+                <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">(); </span><span class="s5">// limpiar entrada inválida</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// === CONFIRMACIÓN PARA CONTINUAR O VOLVER ===</span>
+    <span class="s0">private static boolean </span><span class="s1">deseaContinuar</span><span class="s2">(</span><span class="s1">String mensaje</span><span class="s2">) {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+        <span class="s1">String respuesta </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">().</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+        <span class="s0">return </span><span class="s1">respuesta</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;s&quot;</span><span class="s2">) || </span><span class="s1">respuesta</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;si&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
